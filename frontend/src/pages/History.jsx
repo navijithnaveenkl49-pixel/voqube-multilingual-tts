@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Card, CardContent, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Chip, Tabs, Tab, Tooltip } from '@mui/material';
 import { PlayArrow as PlayIcon, Download as DownloadIcon, Delete as DeleteIcon, Restore as RestoreIcon, DeleteForever as DeleteForeverIcon } from '@mui/icons-material';
-import api from '../services/api';
+import api, { SERVER_URL } from '../services/api';
 
 export default function History() {
   const [history, setHistory] = useState([]);
@@ -40,7 +40,7 @@ export default function History() {
   const handleDownload = async (item) => {
     await api.post(`/tts/track_download/${item.id}`);
     const a = document.createElement('a');
-    a.href = item.file_path;
+    a.href = `${SERVER_URL}/${item.file_path}`;
     a.download = `voqube-${item.language}.mp3`;
     document.body.appendChild(a);
     a.click();
@@ -48,7 +48,7 @@ export default function History() {
   };
 
   const playAudio = (path) => {
-    const audio = new Audio(path);
+    const audio = new Audio(`${SERVER_URL}/${path}`);
     audio.play();
   };
 

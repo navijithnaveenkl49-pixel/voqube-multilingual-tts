@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Card, CardContent, Typography, TextField, Button, MenuItem, Select, FormControl, InputLabel, Grid, CircularProgress, Alert, Switch, FormControlLabel } from '@mui/material';
 import { VolumeUp as VolumeUpIcon, Download as DownloadIcon, Star as StarIcon } from '@mui/icons-material';
-import api from '../services/api';
+import api, { SERVER_URL } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 
 const languages = [
@@ -53,7 +53,7 @@ export default function Dashboard() {
     if(!generatedAudio) return;
     try {
       await api.post(`/tts/track_download/${generatedAudio.id}`);
-      const url = generatedAudio.file_path;
+      const url = `${SERVER_URL}/${generatedAudio.file_path}`;
       const a = document.createElement('a');
       a.href = url;
       a.download = `voqube-${generatedAudio.language}.mp3`;
@@ -236,7 +236,7 @@ export default function Dashboard() {
                     }}>
                       <audio 
                         controls 
-                        src={generatedAudio.file_path} 
+                        src={`${SERVER_URL}/${generatedAudio.file_path}`} 
                         style={{ 
                           width: '100%', 
                           outline: 'none', 
