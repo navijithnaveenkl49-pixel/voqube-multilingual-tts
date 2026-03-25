@@ -1,3 +1,5 @@
 {
-    "snyk.advanced.autoSelectOrganization": true
+    "snyk.advanced.autoSelectOrganization": true,
+    "python.defaultInterpreterPath": "backend\\venv\\Scripts\\python.exe",
+    "python.analysis.extraPaths": ["./backend"]
 }

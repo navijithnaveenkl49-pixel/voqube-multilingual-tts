@@ -12,10 +12,14 @@ DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_PORT = os.getenv("DB_PORT", "3306")
 DB_NAME = os.getenv("DB_NAME", "voqube")
 
-# Updated for Supabase (PostgreSQL)
+# Force host-based connection for Render/Supabase
+print(f"DEBUG: Connecting to {DB_HOST}:{DB_PORT}")
 SQLALCHEMY_DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL,
+    connect_args={"connect_timeout": 10}
+)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
