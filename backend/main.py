@@ -59,12 +59,15 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Email already registered")
         
     hashed_password = auth_utils.get_password_hash(user.password)
+    # Auto-elevate the 'admin' username to admin role for setup
+    is_actually_admin = user.is_admin or user.username.lower() == "admin"
+    
     new_user = models.User(
         username=user.username,
         email=user.email,
         hashed_password=hashed_password,
-        role="admin" if user.is_admin else "user",
-        free_generations_left=10 if not user.is_admin else 9999
+        role="admin" if is_actually_admin else "user",
+        free_generations_left=9999 if is_actually_admin else 10
     )
     db.add(new_user)
     db.commit()
