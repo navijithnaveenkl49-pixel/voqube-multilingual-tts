@@ -1,0 +1,31 @@
+# Environment files
+.env
+.env.*
+!.env.production
+
+# Dependencies
+node_modules/
+venv/
+__pycache__/
+
+# Build artifacts
+dist/
+dist-ssr/
+*.pyc
+
+# Firebase
+.firebase/
+firebase-debug.log*
+.firebaserc
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Project-specific
+error.txt
+error_log.txt
+error_log_utf8.txt
+output.txt
+output2.txt
+storage/audio/*.mp3
