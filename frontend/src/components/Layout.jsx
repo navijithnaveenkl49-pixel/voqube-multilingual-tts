@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, IconButton, AppBar, Toolbar, Divider, Avatar, Card, CardContent, Button } from '@mui/material';
-import { Home as HomeIcon, History as HistoryIcon, AdminPanelSettings as AdminIcon, Logout as LogoutIcon, Menu as MenuIcon } from '@mui/icons-material';
+import { Home as HomeIcon, History as HistoryIcon, AdminPanelSettings as AdminIcon, Logout as LogoutIcon, Menu as MenuIcon, Brightness4 as DarkModeIcon, Brightness7 as LightModeIcon } from '@mui/icons-material';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useColorMode } from '../theme';
+import { useTheme } from '@mui/material/styles';
 
 const drawerWidth = 260;
 
 export default function Layout() {
   const { user, logout } = useAuth();
+  const colorMode = useColorMode();
+  const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -130,9 +134,12 @@ export default function Layout() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div" sx={{ color: 'text.primary', fontWeight: 600 }}>
+          <Typography variant="h6" noWrap component="div" sx={{ color: 'text.primary', fontWeight: 600, flexGrow: 1 }}>
             {menuItems.find(m => m.path === location.pathname)?.text || 'VoQube User Portal'}
           </Typography>
+          <IconButton onClick={colorMode.toggleColorMode} color="inherit">
+            {theme.palette.mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
+          </IconButton>
         </Toolbar>
       </AppBar>
 

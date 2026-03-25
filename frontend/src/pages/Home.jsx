@@ -1,11 +1,15 @@
 import React from 'react';
 import { Box, Typography, Button, Container, Grid, Paper, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { Login as LoginIcon, PersonAdd as RegisterIcon, VolumeUp as VolumeIcon } from '@mui/icons-material';
+import { Login as LoginIcon, PersonAdd as RegisterIcon, VolumeUp as VolumeIcon, Brightness4 as DarkModeIcon, Brightness7 as LightModeIcon } from '@mui/icons-material';
+import { useColorMode } from '../theme';
+import { useTheme, IconButton } from '@mui/material';
 
 export default function Home() {
   const navigate = useNavigate();
-
+  const theme = useTheme();
+  const colorMode = useColorMode();
+  
   return (
     <Box sx={{ 
       minHeight: '100vh', 
@@ -18,7 +22,10 @@ export default function Home() {
         <Typography variant="h5" fontWeight="bold" color="primary">
           VoQube
         </Typography>
-        <Box>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <IconButton onClick={colorMode.toggleColorMode} sx={{ mr: 2 }} color="inherit">
+            {theme.palette.mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
+          </IconButton>
           <Button onClick={() => navigate('/login')} sx={{ mr: 2 }}>Login</Button>
           <Button variant="contained" onClick={() => navigate('/register')}>Sign Up</Button>
         </Box>

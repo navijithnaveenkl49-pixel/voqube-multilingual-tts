@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ThemeProvider, CssBaseline } from '@mui/material';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import theme from './theme';
+import { ThemeModeProvider } from './theme';
+import { CssBaseline } from '@mui/material';
 
 // Pages
 import Login from './pages/Login';
@@ -32,7 +32,7 @@ const ProtectedRoute = ({ children, adminOnly = false }) => {
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeModeProvider>
       <CssBaseline />
       <AuthProvider>
         <BrowserRouter>
@@ -59,7 +59,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </AuthProvider>
-    </ThemeProvider>
+    </ThemeModeProvider>
   );
 }
 
