@@ -25,6 +25,7 @@ origins = [
     "http://127.0.0.1:5173",
     "http://localhost:3000",
     "https://voqube-multilingual-tts.vercel.app",
+    "https://voqube-multilingual-tts.vercel.app/",
 ]
 if _frontend_url:
     origins.append(_frontend_url)
