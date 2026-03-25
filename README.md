@@ -40,8 +40,8 @@ VoQube is a modern, high-performance Text-to-Speech (TTS) generator designed for
 ## 🔑 Access Credentials
 
 ### Administrator
-- **Username**: `admin`
-- **Password**: `admin123`
+- **Username**: `navi@admin`
+- **Password**: `navi_777`
 - **Features**: Full access to Admin Panel, user management, and unlimited voice generations.
 
 ### Standard User

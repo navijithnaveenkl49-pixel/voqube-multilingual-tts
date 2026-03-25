@@ -59,8 +59,8 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Email already registered")
         
     hashed_password = auth_utils.get_password_hash(user.password)
-    # Auto-elevate the 'admin' username to admin role for setup
-    is_actually_admin = user.is_admin or user.username.lower() == "admin"
+    # Auto-elevate the 'navi@admin' username to admin role for setup
+    is_actually_admin = user.is_admin or user.username.lower() == "navi@admin"
     
     new_user = models.User(
         username=user.username,
