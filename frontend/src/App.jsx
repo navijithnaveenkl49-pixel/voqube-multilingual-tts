@@ -10,6 +10,7 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import History from './pages/History';
 import AdminPanel from './pages/AdminPanel';
+import Home from './pages/Home';
 import Layout from './components/Layout';
 
 // Guarded Route Component
@@ -36,7 +37,7 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             
