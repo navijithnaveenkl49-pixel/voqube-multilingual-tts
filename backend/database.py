@@ -12,9 +12,15 @@ DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_PORT = os.getenv("DB_PORT", "3306")
 DB_NAME = os.getenv("DB_NAME", "voqube")
 
-# Force host-based connection for Render/Supabase
-print(f"DEBUG: Connecting to {DB_HOST}:{DB_PORT}")
-SQLALCHEMY_DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+import urllib.parse
+
+# Safely encode the password for the connection string
+encoded_password = urllib.parse.quote_plus(DB_PASSWORD)
+
+# Force network connection with SSL for Supabase
+SQLALCHEMY_DATABASE_URL = f"postgresql://{DB_USER}:{encoded_password}@{DB_HOST}:{DB_PORT}/{DB_NAME}?sslmode=require"
+
+print(f"DEBUG: Attempting network connection to {DB_HOST}")
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,
